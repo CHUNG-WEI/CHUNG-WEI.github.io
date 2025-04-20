@@ -1,0 +1,10 @@
+.before-enter {
+  opacity: 0;
+  transform: translateY(60px); /* 更明顯的滑入距離 */
+  transition: all 0.9s cubic-bezier(0.23, 1, 0.32, 1); /* 較慢，節奏柔和 */
+}
+
+.enter {
+  opacity: 1;
+  transform: translateY(0);
+}

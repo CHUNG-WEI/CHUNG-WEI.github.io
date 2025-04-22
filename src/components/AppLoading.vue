@@ -22,9 +22,9 @@ onMounted(() => {
       clearInterval(interval)
         setTimeout(() => {
           show.value = false
-        }, 2500) // 結束後延遲淡出
+        }, 3000) // 結束後延遲淡出
     }
-  }, 175)
+  }, 150)
 })
 </script>
 
@@ -40,7 +40,7 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  animation: fadeOut 1.5s ease-in 3s forwards;
+  animation: fadeOut 1.5s ease-in 2.5s forwards;
 }
 
 .typing-text {

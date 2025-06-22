@@ -1,12 +1,42 @@
 <template>
   <section class="container py-5">
-    <h2 class="text-center text-info mb-4">🛠️ 技能</h2>
-    <div class="d-flex flex-wrap justify-content-center gap-3">
-      <span class="badge bg-primary fs-6 px-3 py-2">Vue.js</span>
-      <span class="badge bg-success fs-6 px-3 py-2">JavaScript</span>
-      <span class="badge bg-warning text-dark fs-6 px-3 py-2">HTML/CSS</span>
-      <span class="badge bg-danger fs-6 px-3 py-2">Bootstrap</span>
-      <span class="badge bg-dark fs-6 px-3 py-2">Git</span>
+    <h2 class="text-center mb-4 text-primary">🛠 我的技能</h2>
+    <div class="row">
+      <div class="col-md-6 mb-4" v-for="category in skillCategories" :key="category.title">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title text-primary">{{ category.title }}</h5>
+            <ul class="list-unstyled mb-0">
+              <li v-for="skill in category.items" :key="skill">• {{ skill }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </template>
+
+<script setup>
+const skillCategories = [
+  {
+    title: '熟練使用',
+    items: [
+      'Vue.js', 'HTML5', 'CSS3', 'Bootstrap',
+      'Node.js', 'Fastify', 'Git', 'Unity'
+    ]
+  },
+  {
+    title: '常用工具 / 技術',
+    items: [
+      'MariaDB', 'Sequelize ORM', 'Docker',
+      'NAS', 'Shell Script'
+    ]
+  },
+  {
+    title: '略懂 / 曾接觸',
+    items: [
+      'Express.js', 'C++', 'Java', 'Python', 'SQL'
+    ]
+  }
+]
+</script>

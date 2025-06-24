@@ -15,8 +15,11 @@
       <section v-fade-slide>
         <Skills />
       </section>
-      <section v-fade-slide>
+      <!-- <section v-fade-slide>
         <Projects />
+      </section> -->
+      <section v-fade-slide>
+        <Experiences />
       </section>
       <section v-fade-slide>
         <Contact />
@@ -34,6 +37,8 @@ import Skills from './components/Skills.vue'
 import Projects from './components/Projects.vue'
 import Contact from './components/Contact.vue'
 import BackgroundEffect from './components/BackgroundEffect.vue'
+import Experiences from './components/Experiences.vue'
+
 
 // 可以額外做個 Navbar.vue 加入
 // import Navbar from './components/Navbar.vue'

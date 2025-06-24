@@ -1,73 +1,63 @@
 <template>
-  <section class="container py-5">
-    <h2 class="text-center mb-4 text-primary">🍙 我的圖片集</h2>
+  <div class="board-card p-6 relative text-center">
+    <h2 class="text-2xl font-bold mb-4">🍙 我的圖片集</h2>
 
-    <div class="position-relative mx-auto" style="max-width: 75%;">
-      <!-- 主圖 + 預覽 -->
-      <div class="d-flex justify-content-center align-items-center position-relative overflow-hidden" style="min-height: 400px;">
-        <!-- 左預覽圖 -->
-        <div
-          class="position-absolute start-0 top-50 translate-middle-y d-none d-md-block"
-          style="width: 25%; opacity: 0.4; z-index: 2; cursor: pointer;"
-          @click="handlePrev"
-        >
-          <img :src="prevImage" class="img-fluid rounded shadow-sm" style="max-height: 300px; object-fit: cover;" />
-        </div>
-
-        <!-- 主圖 -->
-        <div class="z-3 d-flex justify-content-center">
-          <img
-            :src="images[currentIndex]"
-            class="img-fluid rounded shadow"
-            :style="{ maxHeight: '400px', height: 'auto', width: 'auto', maxWidth: '100%' }"
-          />
-        </div>
-
-        <!-- 右預覽圖 -->
-        <div
-          class="position-absolute end-0 top-50 translate-middle-y d-none d-md-block"
-          style="width: 25%; opacity: 0.4; z-index: 2; cursor: pointer;"
-          @click="handleNext"
-        >
-          <img :src="nextImage" class="img-fluid rounded shadow-sm" style="max-height: 300px; object-fit: cover;" />
-        </div>
+    <!-- 圖片展示區 -->
+    <div class="relative flex items-center justify-center">
+      <!-- 左側預覽圖 -->
+      <div
+        class="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 opacity-40 cursor-pointer w-1/4 z-10"
+        @click="handlePrev"
+      >
+        <img :src="prevImage" class="rounded shadow" />
       </div>
 
-      <!-- 左右箭頭 -->
+      <!-- 主圖 -->
+      <div class="z-20 w-full md:w-2/3">
+        <img
+          :src="images[currentIndex]"
+          class="mx-auto rounded shadow"
+          style="max-height: 400px; object-fit: contain;"
+        />
+      </div>
+
+      <!-- 右側預覽圖 -->
+      <div
+        class="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 opacity-40 cursor-pointer w-1/4 z-10"
+        @click="handleNext"
+      >
+        <img :src="nextImage" class="rounded shadow" />
+      </div>
+
+      <!-- 左右箭頭按鈕 -->
       <button
         @click="handlePrev"
-        class="btn btn-outline-primary position-absolute top-50 start-0 translate-middle-y"
-        style="z-index: 10;"
-      >
-        ‹
-      </button>
+        class="nav-arrow left-4"
+      >‹</button>
       <button
         @click="handleNext"
-        class="btn btn-outline-primary position-absolute top-50 end-0 translate-middle-y"
-        style="z-index: 10;"
-      >
-        ›
-      </button>
+        class="nav-arrow right-4"
+      >›</button>
     </div>
 
-    <!-- 小圓點 -->
-    <div class="text-center mt-3">
+    <!-- 小圓點導覽 -->
+    <div class="flex justify-center mt-4 gap-2">
       <button
         v-for="(img, index) in images"
         :key="index"
         @click="goTo(index)"
-        class="btn btn-sm mx-1"
-        :class="index === currentIndex ? 'btn-primary' : 'btn-outline-secondary'"
-        style="border-radius: 50%; width: 12px; height: 12px; padding: 0;"
+        :class="[
+          'w-3 h-3 rounded-full border-2',
+          index === currentIndex ? 'bg-yellow-800 border-yellow-900' : 'bg-white border-gray-500'
+        ]"
       ></button>
     </div>
-  </section>
+  </div>
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 
-// 自動載入 images 資料夾底下的所有圖片
 const imageModules = import.meta.glob('../assets/images/*.{jpg,jpeg,png,gif}', { eager: true })
 const images = Object.values(imageModules).map(mod => mod.default)
 
@@ -112,3 +102,15 @@ onUnmounted(() => {
   clearInterval(timer)
 })
 </script>
+
+<style scoped>
+.board-card {
+  background-color: #f5deb3;
+  border: 4px solid #8b5e3c;
+  border-radius: 12px;
+  box-shadow: inset 0 0 5px #5c3b1f;
+}
+.nav-arrow {
+  @apply absolute top-1/2 -translate-y-1/2 bg-yellow-700 text-white text-2xl rounded-full w-8 h-8 flex items-center justify-center shadow z-30;
+}
+</style>
